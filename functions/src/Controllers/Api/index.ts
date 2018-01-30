@@ -20,11 +20,12 @@ app.use(function(req, res, next) {
     res.error = (err: string, code: number = 400, data: object | string) => {
         res.json(error(err, code, data));
     };
+
     next();
 });
 
-// NOTE Enable auth middleware before production
-// app.use( FirebaseAuth );
+// NOTE Enable auth middleware for production
+app.use( FirebaseAuth );
 
 // Routes
 app.use('/v1/', api);

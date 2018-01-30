@@ -8,9 +8,9 @@
             "root": "src",
             "outDir": "dist",
             "assets": [
-        "assets",
-        "favicon.ico"
-      ],
+                "assets",
+                "favicon.ico"
+              ],
             "index": "index.html",
             "main": "main.ts",
             "polyfills": "polyfills.ts",
@@ -19,8 +19,19 @@
             "testTsconfig": "tsconfig.spec.json",
             "prefix": "jnex",
             "styles": [
-        "styles.scss"
-      ],
+                "../node_modules/trumbowyg/dist/ui/trumbowyg.min.css",
+                "../node_modules/select2/dist/css/select2.min.css",
+                "../node_modules/bootstrap/scss/bootstrap.scss",
+                "../node_modules/animate.css/animate.min.css",
+                "styles.scss"
+            ],
+            "scripts": [
+                "../node_modules/jquery/dist/jquery.min.js",
+                "../node_modules/popper.js/dist/popper.min.js",
+                "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+                "../node_modules/select2/dist/js/select2.min.js",
+                "../node_modules/trumbowyg/dist/trumbowyg.min.js"
+            ],
             "scripts": [],
             "environmentSource": "environments/environment.ts",
             "environments": {

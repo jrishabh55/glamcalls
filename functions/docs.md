@@ -15,3 +15,6 @@ Base URL: `https://us-central1-audition-007.cloudfunctions.net/api/v1/`
 4. GET `/logs` GET USER LOGS
 5. GET `/quotes` GET QUOTES
 6. POST `/profile` GET PROFILE
+7. /payment'
+8. /payment/success'
+9. /payment/failure'

@@ -1,47 +1,27 @@
 [
     {
-        "id": 21,
-        "quote": "This is a quote for app. Please check",
-        "bg": "https://cdn.pixabay.com/photo/2015/06/19/17/58/sample-815141_960_720.jpg"
+        "id": 1,
+        "quote": "Happiness can exist only in acceptance.",
+        "bg": "https://www.pluralsight.com/content/pluralsight/en/blog/creative-professional/thi/things-every-artist-know-paint-appealing-environments/_jcr_content/main/hero_blog_block/image-res.img.jpg/1446606716740.jpg"
     },
     {
-        "id": 21,
-        "quote": "This is a quote for app. Please check",
-        "bg": "https://cdn.pixabay.com/photo/2015/06/19/17/58/sample-815141_960_720.jpg"
+        "id": 2,
+        "quote": "Love has no age, no limit; and no death.",
+        "bg": "https://render.fineartamerica.com/images/rendered/search/print/8.000/4.500/break/images/artworkimages/medium/1/infinite-oz-philip-straub.jpg"
     },
     {
-        "id": 21,
-        "quote": "This is a quote for app. Please check",
-        "bg": "https://cdn.pixabay.com/photo/2015/06/19/17/58/sample-815141_960_720.jpg"
+        "id": 3,
+        "quote": "You can't blame gravity for falling in love.",
+        "bg": "https://cdn.shopify.com/s/files/1/1130/7582/products/evening_routine_7ff88ee0-11ca-416f-be07-db1626c230c0_1024x1024.jpg?v=1469614534"
     },
     {
-        "id": 21,
-        "quote": "This is a quote for app. Please check",
-        "bg": "https://cdn.pixabay.com/photo/2015/06/19/17/58/sample-815141_960_720.jpg"
+        "id": 4,
+        "quote": "There is only one corner of the universe you can be certain of improving, and that's your own self.",
+        "bg": "https://media1.britannica.com/eb-media/60/95760-004-F0029692.jpg"
     },
     {
-        "id": 21,
-        "quote": "This is a quote for app. Please check",
-        "bg": "https://cdn.pixabay.com/photo/2015/06/19/17/58/sample-815141_960_720.jpg"
-    },
-    {
-        "id": 21,
-        "quote": "This is a quote for app. Please check",
-        "bg": "https://cdn.pixabay.com/photo/2015/06/19/17/58/sample-815141_960_720.jpg"
-    },
-    {
-        "id": 21,
-        "quote": "This is a quote for app. Please check",
-        "bg": "https://cdn.pixabay.com/photo/2015/06/19/17/58/sample-815141_960_720.jpg"
-    },
-    {
-        "id": 21,
-        "quote": "This is a quote for app. Please check",
-        "bg": "https://cdn.pixabay.com/photo/2015/06/19/17/58/sample-815141_960_720.jpg"
-    },
-    {
-        "id": 21,
-        "quote": "This is a quote for app. Please check",
+        "id": 5,
+        "quote": "A new command I give you: Love one another. As I have loved you, so you must love one another.",
         "bg": "https://cdn.pixabay.com/photo/2015/06/19/17/58/sample-815141_960_720.jpg"
     }
 ]

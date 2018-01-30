@@ -22,50 +22,6 @@ export class AuthService {
             .then(user => this.User = firebase.auth().currentUser);
     }
 
-    loginWithGoogle(): Promise<any> {
-        return this.oAuthLogin(new firebase.auth.GoogleAuthProvider());
-    }
-
-    loginWithFacebook(): Promise<any> {
-        return this.oAuthLogin(new firebase.auth.FacebookAuthProvider());
-    }
-
-    loginWithTwitter(): Promise<any> {
-        return this.oAuthLogin(new firebase.auth.TwitterAuthProvider());
-    }
-
-    oAuthLogin (provider: firebase.auth.AuthProvider): Promise<any> {
-        return this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
-        .then(() => {
-            return this.afAuth.auth.signInWithPopup(provider)
-            .catch(error => {
-                if (error.code === 'auth/account-exists-with-different-credential') {
-                    const pendingCred = error.credential;
-                    const email = error.email;
-                    return this.afAuth.auth.fetchProvidersForEmail(email).then((providers) => {
-                        if (providers[0] === 'password') {
-                            const password = prompt('Please Enter your Existing password');
-                            return this.afAuth.auth.signInWithEmailAndPassword(email, password).then((user) => {
-                                return user.link(pendingCred);
-                            });
-                        }
-
-                        let nProvider;
-                        switch (providers[0]) {
-                            case 'google.com': nProvider = new firebase.auth.GoogleAuthProvider(); break;
-                            case 'facebook.com': nProvider = new firebase.auth.FacebookAuthProvider(); break;
-                            case 'twitter.com': nProvider = new firebase.auth.TwitterAuthProvider(); break;
-                        }
-                        return this.afAuth.auth.signInWithPopup(nProvider).then((result) => {
-                            return result.user.linkWithCredential(pendingCred);
-                        });
-                    });
-                }
-                throw new Error(error);
-            });
-        }).then(user => this.User = firebase.auth().currentUser);
-    }
-
     logout(): Promise<void> {
         localStorage.clear();
         return this.afAuth.auth.signOut();
@@ -76,7 +32,7 @@ export class AuthService {
     }
 
     get authenticated(): boolean {
-        return this.User !== null;
+        return !!this.User;
     }
 
     get currentUserAnonymous(): boolean {
