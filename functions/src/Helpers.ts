@@ -32,3 +32,25 @@ export function auditions(data): object {
 export function etc(filename: string): string {
     return path.join(__dirname, '..', 'etc', filename);
 }
+
+export function addMonth(month: number = 1, date?: Date): Date {
+    let temp: Date;
+    if (!date) {
+        temp = new Date(Date.now());
+    } else {
+        temp = date;
+    }
+    temp.setFullYear(temp.getFullYear(), temp.getMonth() + month, temp.getDay());
+    return temp;
+}
+
+export function addYear(year: number = 1, date?: Date): Date {
+    let temp: Date;
+    if (!date) {
+        temp = new Date(Date.now());
+    } else {
+        temp = date;
+    }
+    temp.setFullYear(temp.getFullYear() + year, temp.getMonth(), temp.getDay());
+    return temp;
+}

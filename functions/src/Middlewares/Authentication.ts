@@ -38,8 +38,7 @@ export const FirebaseAuth = async function(req: Request, res: Response, next) {
         next();
     } catch (e) {
         console.error(e);
-        res.error("Something went wrong in the authentication.");
-        return;
+        return res.error("Something went wrong in the authentication.");
     }
 
 }

@@ -1,13 +1,18 @@
 import { Request, Response } from 'express';
-import { db2, error, etc, auditions as _auditions } from '../../Helpers';
+import { db2, error, etc, auditions as _auditions, addMonth, addYear } from '../../Helpers';
 import { Audition, User } from '../../Interfaces';
-
-import * as fs from 'fs';
 
 export class Api {
 
     static init() {
         return (new Api());
+    }
+
+    async test(req, res) {
+        // const users = await db2.collection('/users').where('plan', '==', 'paid').get();
+        // users.forEach(async user => await user.ref.update({planValid: addMonth(12).getTime()}));
+
+        res.api("updated all");
     }
 
     async register(req: Request, res: Response) {
@@ -18,10 +23,7 @@ export class Api {
 
             if (req.user.newUser) {
                 user['newUser'] = false;
-                required.push('gender');
-                required.push('number');
-                required.push('ref');
-                required.push("age_group");
+                required.push('gender' ,'number' ,'ref' ,"age_group");
             }
 
             for (const key in params) {
@@ -30,11 +32,35 @@ export class Api {
                 }
             }
 
+            if (user['number']) {
+                const err = await db2.collection('/users').where('number', '==', user['number']).get();
+                if (!err.empty) {
+                    throw Error(`Number ${user['number']} alredy exists.`);
+                }
+            }
+
+            if (user['ref']) {
+                const refUserQuery = await db2.collection('/users').where('username', '==', user['ref']).where('plan', '==', 'paid').limit(1).get();
+                if (!refUserQuery.empty) {
+                    const refUser = refUserQuery.docs[0];
+                    const refUserData = <User>refUser.data();
+                    const time: Date = addMonth(1, new Date(refUserData.planValid));
+
+                    refUser.ref.update({
+                        planValid: time.getTime()
+                    });
+                    refUser.ref.collection('references').add({ id : req.user.uid, added: Date.now() })
+
+                    user['plan'] = 'paid';
+                    user['planValid'] = addMonth().getTime();
+                }
+            }
+
             await db2.collection('/users').doc(req.user.uid).update(user);
             return res.api('User has been updated.');
         } catch (e) {
             console.error(e);
-            return res.api(error(e.message));
+            return res.error(e.message);
         }
     }
 
@@ -52,7 +78,6 @@ export class Api {
         const response = [];
         await auditions.forEach(aud => {
             const data = <Audition>aud.data();
-            // console.log(data);
             if (req.user.age_group.indexOf(data.age_group) < 0) {
                 return;
             }
@@ -60,7 +85,6 @@ export class Api {
             data.title = data.casting_update_for;
             response.push(data);
         });
-        // const aud = fs.readFileSync(etc("auditions.json"), { encoding: 'utf8' });
         return res.api(_auditions(response));
     }
 
@@ -70,7 +94,6 @@ export class Api {
         if (!audition.exists) {
             return res.error("Invalid id");
         }
-        // const aud = fs.readFileSync(etc("auditions.json"), { encoding: 'utf8' });
         return res.api({ audition: audition.data() });
     }
 
@@ -89,7 +112,6 @@ export class Api {
 
     async logs(req: Request, res: Response) {
         const ref = await db2.collection('/users').doc(req.user.uid).collection('logs').limit(10).orderBy('applied_on', 'desc').get();
-        console.log("___LOGS___", req.user.uid);
         if (ref.empty) {
             return res.api({ logs: [] });
         }
@@ -98,17 +120,9 @@ export class Api {
         return res.api({ logs: r });
     }
 
-    async quotes(req: Request, res: Response) {
-        // FIXME quote from a db
-        const quotes = fs.readFileSync(etc("quotes.json"), { encoding: 'utf8' });
-        return res.api({ quotes: JSON.parse(quotes) });
-    }
-
     async quote(req: Request, res: Response) {
 
         const ref = await db2.collection('/quotes').get();
-        console.log(ref.empty);
-        //
         if (ref.empty) {
             return res.api({ quote: {} });
         }
@@ -172,7 +186,6 @@ export class Api {
     async notifications(req: Request, res: Response) {
 
         const ref = await db2.collection('/notifications').limit(10).orderBy('time', 'desc').get();
-        console.log(ref.empty);
         if (ref.empty) {
             return res.api({ notifications: [] });
         }

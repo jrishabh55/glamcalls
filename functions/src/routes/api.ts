@@ -21,4 +21,6 @@ router.post('/payment', PaymentController.genHash);
 router.post('/payment/success', PaymentController.success);
 router.get('/payment/failure', PaymentController.faliour);
 
+router.get('/test', Api.test);
+
 export default router;

@@ -8,6 +8,7 @@ export interface User {
     auditions: number;
     plan: 'free' | 'paid';
     age_group: string[];
+    planValid: string;
 }
 
 export interface Audition {
