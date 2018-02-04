@@ -31,15 +31,15 @@ export class ListComponent implements OnInit {
     }
 
     ngOnInit() {
-       const ref = this.collection.ref;
-       ref.get()
-        .then((docs) => {
-            docs.forEach(doc => {
-                const data = doc.data();
-                data.id = doc.id;
-                this.auditions.push( <Audition>data );
-            });
-        }).catch(err => console.error(err));
+        const ref = this.collection.ref;
+        ref.get()
+            .then((docs) => {
+                docs.forEach(doc => {
+                    const data = doc.data();
+                    data.id = doc.id;
+                    this.auditions.push(<Audition>data);
+                });
+            }).catch(err => console.error(err));
     }
 
 }
