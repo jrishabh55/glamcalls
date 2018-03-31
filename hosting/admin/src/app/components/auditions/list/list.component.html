@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="card mx-auto">
+    <div class="card mx-auto my-3">
         <div class="card-header bg-dark text-light">Audition List</div>
         <div class="card-block">
             <div class="col-12">
@@ -7,7 +7,7 @@
                     <thead class="bg-dark text-light">
                         <!-- <caption>List of all the auditions.</caption> -->
                         <tr>
-                            <th scope="col">Audition Title</th>
+                            <th scope="col">Casting update for</th>
                             <th scope="col">Campaign for</th>
                             <th scope="col">Age Group</th>
                             <th scope="col">Audition Date</th>
@@ -20,11 +20,11 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let audition of auditions">
-                            <td>{{ audition.title }}</td>
+                            <td>{{ audition.casting_update_for }}</td>
                             <td>{{ audition.looking_for }}</td>
                             <td>{{ audition.age_group }}</td>
-                            <td>{{ audition.audition_date }}</td>
-                            <td>{{ audition.audition_ends }}</td>
+                            <td>{{ audition.audition_date | date }}</td>
+                            <td>{{ audition.audition_ends | date }}</td>
                             <td>{{ audition.audition_time }}</td>
                             <td>{{ audition.number }}</td>
                             <td>{{ audition.email }}</td>

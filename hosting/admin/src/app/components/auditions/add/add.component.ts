@@ -37,13 +37,16 @@ export class AddComponent implements OnInit {
             return;
         }
 
+        const start = new Date(this.audition_date);
+        const end = new Date(this.audition_ends);
+
         const data = {
             casting_update_for: this.casting_update_for,
             project_details: this.project_details,
             looking_for: this.looking_for,
             age_group: this.age_group,
-            audition_date: this.audition_date,
-            audition_ends: this.audition_ends,
+            audition_date: start.getTime(),
+            audition_ends: end.getTime(),
             audition_time: this.audition_time,
             audition_address: this.audition_address,
             dress_code: this.dress_code,
@@ -55,7 +58,7 @@ export class AddComponent implements OnInit {
 
         this.fs.collection('/auditions').add(data)
             .then(res => {
-                this.message = 'Audition added succufully.';
+                this.message = 'Audition added successfully.';
                 window.scroll(0, 0);
             }).catch(error => console.log(error));
 

@@ -1,0 +1,34 @@
+<div class="col-6 mx-auto mt-3">
+    <div class="card mx-auto">
+        <div class="card-header bg-dark text-light">Add Notifications</div>
+        <div class="card-block">
+            <div class="col mt-3">
+                <div class="row align-items-center">
+                    <div class="col mx-auto align-self-center wrapper">
+                        <form class="mx-auto">
+                            <p *ngIf="error" class="animated shake"><span class="badge badge-pill badge-danger wrap"> {{ error }} </span></p>
+                            <p *ngIf="message" class="animated pulse"><span class="badge badge-pill badge-success wrap"> {{ message.msg }} </span></p>
+                            <div class="form-group row">
+                                <label for="title" class="col-3 col-form-label">Title</label>
+                                <div class="col-9">
+                                    <input type="text" class="form-control" max="140" id="title" name="email" placeholder="Title" [(ngModel)]="title">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="body" class="col-3 col-form-label">Body</label>
+                                <div class="col-9">
+                                    <textarea class="form-control" name="title" id="body" placeholder="Body" [(ngModel)]="body"> </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-2 ml-auto">
+                                    <button class="btn btn-primary btn-block" type="submit" (click)="add()">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

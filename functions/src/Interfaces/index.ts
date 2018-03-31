@@ -9,6 +9,8 @@ export interface User {
     plan: 'free' | 'paid';
     age_group: string[];
     planValid: string;
+    gender: 'Male' | 'Female';
+    number: number;
 }
 
 export interface Audition {
@@ -38,4 +40,11 @@ export interface PaymentData {
     lastname: string;
     firstname: string;
 
+}
+
+export interface Notification {
+    id: string;
+    title: string;
+    body: string;
+    time: number;
 }

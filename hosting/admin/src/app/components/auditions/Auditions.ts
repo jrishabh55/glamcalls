@@ -1,6 +1,5 @@
 export default interface Audition {
     id: string;
-    title: string;
     casting_update_for: string;
     project_details: string;
     looking_for: string;

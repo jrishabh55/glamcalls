@@ -1,7 +1,7 @@
 import * as sha512 from 'js-sha512';
 import { Response } from 'express';
 import { Request } from 'express-serve-static-core';
-import { db2, addMonth, addYear } from '../../Helpers';
+import { db2, addYear } from '../../Helpers';
 
 export class PaymentController {
 
@@ -21,7 +21,7 @@ export class PaymentController {
 
         const hashData = { preHashString: key + '|' + data.txnid + '|' + data.amount + '|' + data.productinfo + '|' + data.firstname + '|' + data.email + '|||||||||||' };
         const hash = sha512(hashData.preHashString + salt);
-        return res.api({hash: hash});
+        return res.api({ hash: hash });
     }
 
     async success(req: Request, res: Response) {

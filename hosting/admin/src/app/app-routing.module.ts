@@ -6,9 +6,16 @@ import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
+
 import { AddComponent as AuditionAddComponent } from './components/auditions/add/add.component';
 import { ListComponent as AuditionListComponent } from './components/auditions/list/list.component';
+
+import { AddComponent as NotificationAddComponent } from './components/notifications/add/add.component';
+import { ListComponent as NotificationListComponent } from './components/notifications/list/list.component';
+
 import { ListComponent as UserListComponent } from './components/users/list/list.component';
+
+import { ListComponent as FeedbackListComponent } from './components/feedback/list/list.component';
 
 const routes: Routes = [
     {
@@ -43,6 +50,31 @@ const routes: Routes = [
                         path: 'add',
                         pathMatch: 'full',
                         component: AuditionAddComponent
+                    }
+                ]
+            },
+            {
+                path: 'feedbacks',
+                children: [
+                    {
+                        path: '',
+                        pathMatch: 'full',
+                        component: FeedbackListComponent
+                    }
+                ]
+            },
+            {
+                path: 'notifications',
+                children: [
+                    {
+                        path: '',
+                        pathMatch: 'full',
+                        component: NotificationListComponent
+                    },
+                    {
+                        path: 'add',
+                        pathMatch: 'full',
+                        component: NotificationAddComponent
                     }
                 ]
             },

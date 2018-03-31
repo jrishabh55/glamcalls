@@ -13,6 +13,8 @@ import { AddComponent } from './components/auditions/add/add.component';
 import { ListComponent } from './components/auditions/list/list.component';
 import { UsersModule } from './users/users.module';
 import { QuotesModule } from './quotes/quotes.module';
+import { NotificationsModule } from './notifications/notifications.module';
+import { FeedbackModule } from './feedback/feedback.module';
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { QuotesModule } from './quotes/quotes.module';
         CoreModule,
         UsersModule,
         QuotesModule,
+        NotificationsModule,
+        FeedbackModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

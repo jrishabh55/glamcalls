@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 import { AuthGuard } from '../guards/auth.guard';
 import { AuthService } from '../services/auth.service';
 import { BlogsModule } from '../blogs/blogs.module';
+import { DatePipe } from '../pipes/date.pipe';
 
 @NgModule({
     imports: [
@@ -17,7 +18,7 @@ import { BlogsModule } from '../blogs/blogs.module';
         AngularFireModule.initializeApp(environment.firebase),
         BlogsModule,
     ],
-    declarations: [],
+    declarations: [DatePipe],
     providers: [AuthService, AuthGuard]
 })
 export class CoreModule { }

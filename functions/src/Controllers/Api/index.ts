@@ -25,7 +25,7 @@ app.use(function(req, res, next) {
 });
 
 // NOTE Enable auth middleware for production
-app.use( FirebaseAuth );
+app.use(FirebaseAuth);
 
 // Routes
 app.use('/v1/', api);

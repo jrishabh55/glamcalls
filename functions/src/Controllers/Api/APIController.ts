@@ -1,18 +1,11 @@
 import { Request, Response } from 'express';
-import { db2, error, etc, auditions as _auditions, addMonth, addYear } from '../../Helpers';
+import { db2, auditions as _auditions, addMonth } from '../../Helpers';
 import { Audition, User } from '../../Interfaces';
 
 export class Api {
 
     static init() {
         return (new Api());
-    }
-
-    async test(req, res) {
-        // const users = await db2.collection('/users').where('plan', '==', 'paid').get();
-        // users.forEach(async user => await user.ref.update({planValid: addMonth(12).getTime()}));
-
-        res.api("updated all");
     }
 
     async register(req: Request, res: Response) {
@@ -23,7 +16,7 @@ export class Api {
 
             if (req.user.newUser) {
                 user['newUser'] = false;
-                required.push('gender' ,'number' ,'ref' ,"age_group");
+                required.push('gender', 'number', 'ref', "age_group");
             }
 
             for (const key in params) {
@@ -49,7 +42,7 @@ export class Api {
                     refUser.ref.update({
                         planValid: time.getTime()
                     });
-                    refUser.ref.collection('references').add({ id : req.user.uid, added: Date.now() })
+                    refUser.ref.collection('references').add({ id: req.user.uid, added: Date.now() })
 
                     user['plan'] = 'paid';
                     user['planValid'] = addMonth().getTime();
@@ -78,7 +71,7 @@ export class Api {
         const response = [];
         await auditions.forEach(aud => {
             const data = <Audition>aud.data();
-            if (req.user.age_group.indexOf(data.age_group) < 0) {
+            if (req.user.age_group.indexOf(data.age_group) < 0 || req.user.gender.toLowerCase() !== data.looking_for.toLowerCase()) {
                 return;
             }
             data.id = aud.id;
@@ -89,7 +82,7 @@ export class Api {
     }
 
     async audition(req: Request, res: Response) {
-        const id = req.param('id', "");
+        const { id } = req.params;
         const audition = await db2.collection('/auditions').doc(id).get();
         if (!audition.exists) {
             return res.error("Invalid id");
@@ -133,7 +126,7 @@ export class Api {
             quote.id = q.id;
         });
 
-        res.api({ quote: quote});
+        res.api({ quote: quote });
     }
 
     async auditionAction(req: Request, res: Response) {
@@ -197,6 +190,16 @@ export class Api {
         });
 
         return res.api({ notifications: data });
+    }
+
+    async feedback(req: Request, res: Response) {
+        await db2.collection('/feedback').add({
+            user: req.user.uid,
+            message: req.body.message,
+            created_at: Date.now()
+        });
+
+        return res.api({});
     }
 }
 

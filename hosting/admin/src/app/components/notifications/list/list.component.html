@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="card mx-auto">
+        <div class="card-header bg-dark text-light">Notifications List</div>
+        <div class="card-block">
+            <div class="col-12">
+                <table class="table table-bordered table-dashed mt-2">
+                    <thead class="bg-dark text-light">
+                        <!-- <caption>List of all the auditions.</caption> -->
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Desc</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let notification of notifications">
+                            <td>{{ notification.title }}</td>
+                            <td>{{ notification.body }}</td>
+                            <td>{{ notification.time | date }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger" (click)="delete(notification.id)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

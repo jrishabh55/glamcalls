@@ -17,12 +17,16 @@ export class ListComponent implements OnInit {
         this.collection = fs.collection('/users');
     }
 
-    disable(i: number) {
+    async disable(id: string) {
         alert('Account has not been disabled.');
     }
 
-    delete(i: number) {
-        alert('Account has not been deleted.');
+    async delete(id: string, index: number) {
+        const del = confirm('Please confirm the deletion.');
+        if (del) {
+            await this.fs.collection('/users').doc(id).delete();
+            this.users.splice(index, 1);
+        }
     }
 
     ngOnInit() {
